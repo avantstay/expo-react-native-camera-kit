@@ -1,6 +1,7 @@
 import {mergeContents} from "@expo/config-plugins/build/utils/generateCode";
 import {ExpoConfig} from "@expo/config-types";
 import {withProjectBuildGradle} from "@expo/config-plugins";
+import {PluginConfig} from "./types";
 
 const addKotlinGradlePluginProjectDependency = (projectBuildGradle: string) =>
   mergeContents({
@@ -12,21 +13,18 @@ const addKotlinGradlePluginProjectDependency = (projectBuildGradle: string) =>
     comment: '//',
   }).contents
 
-const addKotlinVersionPluginProjectDependency = (projectBuildGradle: string) =>
+const addKotlinVersionPluginProjectDependency = (projectBuildGradle: string, kotlinVersion: string = '1.7.20') =>
   mergeContents({
-    tag: `react-native-camera-kit version`,
+    tag: `react-native-camera-kit ensure kotlin_version`,
     src: projectBuildGradle,
-    newSrc: `if (findProperty('android.kotlinVersion')) {
-            kotlin_version = findProperty('android.kotlinVersion')
-        }`,
-    anchor: /ext/,
+    newSrc: `kotlinVersion = findProperty('kotlinVersion') ?: '${kotlinVersion}'\nkotlin_version = kotlinVersion`,
+    anchor: /ndkVersion = .+?$/,
     offset: 1,
     comment: '//',
   }).contents
 
 
-
-export const withProjectGradle = (expoConfig: ExpoConfig) =>
+export const withProjectGradle = (expoConfig: ExpoConfig, pluginConfig: PluginConfig) =>
   withProjectBuildGradle(expoConfig, ({ modResults, ...config }) => {
     if (modResults.language !== 'groovy') {
       throw new Error(
@@ -34,7 +32,7 @@ export const withProjectGradle = (expoConfig: ExpoConfig) =>
       )
     }
 
-    modResults.contents = addKotlinVersionPluginProjectDependency(modResults.contents)
+    modResults.contents = addKotlinVersionPluginProjectDependency(modResults.contents, pluginConfig?.kotlinVersion )
     modResults.contents = addKotlinGradlePluginProjectDependency(modResults.contents)
 
     return { modResults, ...config }
