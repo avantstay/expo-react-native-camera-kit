@@ -1,6 +1,6 @@
 {
   "name": "expo-react-native-camera-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "build/main.js",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --platform=node --target=node16 --packages=external --outfile=build/main.js",
