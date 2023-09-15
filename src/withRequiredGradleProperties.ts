@@ -1,14 +1,21 @@
-import {ExpoConfig} from "@expo/config-types";
-import {withGradleProperties} from "@expo/config-plugins";
-import type {PluginConfig} from "./types";
+import { ExpoConfig } from "@expo/config-types";
+import { withGradleProperties } from "@expo/config-plugins";
+import type { PluginConfig } from "./types";
 
-export const withRequiredGradleProperties = (expoConfig: ExpoConfig, pluginConfig?: PluginConfig) =>
+export const withRequiredGradleProperties = (
+  expoConfig: ExpoConfig,
+  pluginConfig?: PluginConfig,
+) =>
   withGradleProperties(expoConfig, async ({ modResults, ...config }) => {
-    modResults = modResults || []
+    modResults = modResults || [];
 
     if (pluginConfig?.minSdkVersion) {
-      modResults.push({ type: 'property', key: 'android.minSdkVersion', value: pluginConfig?.minSdkVersion })
+      modResults.push({
+        type: "property",
+        key: "android.minSdkVersion",
+        value: pluginConfig?.minSdkVersion,
+      });
     }
 
-    return { modResults, ...config }
-  })
+    return { modResults, ...config };
+  });

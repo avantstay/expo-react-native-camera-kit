@@ -1,1 +1,1 @@
-export type PluginConfig = {kotlinVersion?: string, minSdkVersion?: string}
+export type PluginConfig = { kotlinVersion?: string; minSdkVersion?: string };

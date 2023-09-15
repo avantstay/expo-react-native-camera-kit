@@ -1,7 +1,6 @@
-import {mergeContents} from "@expo/config-plugins/build/utils/generateCode";
-import {ExpoConfig} from "@expo/config-types";
-import {withAppBuildGradle} from "@expo/config-plugins";
-
+import { mergeContents } from "@expo/config-plugins/build/utils/generateCode";
+import { ExpoConfig } from "@expo/config-types";
+import { withAppBuildGradle } from "@expo/config-plugins";
 
 const addKotlinAndroidExtensionsGradlePlugin = (appBuildGradle: string) => {
   return mergeContents({
@@ -10,19 +9,20 @@ const addKotlinAndroidExtensionsGradlePlugin = (appBuildGradle: string) => {
     newSrc: `apply plugin: "kotlin-android"\napply plugin: "kotlin-android-extensions"`,
     anchor: /^$/,
     offset: 1,
-    comment: '//',
-  }).contents
-}
-
+    comment: "//",
+  }).contents;
+};
 
 export const withAppBuildGradleExtension = (expoConfig: ExpoConfig) =>
   withAppBuildGradle(expoConfig, ({ modResults, ...config }) => {
-    if (modResults.language !== 'groovy') {
+    if (modResults.language !== "groovy") {
       throw new Error(
-        'Cannot configure react-native-camera-kit in the app gradle because the file is not groovy.'
-      )
+        "Cannot configure react-native-camera-kit in the app gradle because the file is not groovy.",
+      );
     }
 
-    modResults.contents = addKotlinAndroidExtensionsGradlePlugin(modResults.contents)
-    return { modResults, ...config }
-  })
+    modResults.contents = addKotlinAndroidExtensionsGradlePlugin(
+      modResults.contents,
+    );
+    return { modResults, ...config };
+  });
