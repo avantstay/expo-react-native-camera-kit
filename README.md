@@ -1,5 +1,5 @@
 # Expo React Native Camera Kit
-[Expo Plugin](https://docs.expo.dev/config-plugins/plugins-and-mods/) to integrate with [react-native-camera-kit](https://github.com/teslamotors/react-native-camera-kit) without having to eject
+[Expo Plugin](https://docs.expo.dev/config-plugins/plugins-and-mods/) to integrate Expo managed workflow with [react-native-camera-kit](https://github.com/teslamotors/react-native-camera-kit) without having to eject
 
 
 <a href="https://www.npmjs.org/package/expo-react-native-camera-kit">
