@@ -21,6 +21,47 @@ yarn
 yarn add expo-react-native-camera-kit
 ```
 
+## Configuration in app.json / app.config.js
+### Plugin
+
+
+**app.json**
+```json
+{
+  "plugins": [
+    [
+      "expo-react-native-camera-kit",
+      {
+        "minSdkVersion": 23
+      }
+    ]
+  ]
+}
+```
+
+or
+
+**app.config.js**
+```js
+export default {
+  ...
+  plugins: [
+    [
+      expo-react-native-camera-kit,
+      {
+        minSdkVersion: 23
+      }
+    ]
+  ]
+};
+```
+
+It's also possible to set the `kotlinVersion`.
+
+If no version is provided and there is no `kotlinVersion` set in the project (Expo SDK 48 does not set `kotlinVersion`) it uses as `1.7.20`
+
+Expo SDK 49 sets `kotlinVersion` to 1.8.10 so this plugin uses that version.
+
 
 ### What this plugin does
 
