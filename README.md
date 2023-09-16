@@ -47,7 +47,7 @@ export default {
   ...
   plugins: [
     [
-      expo-react-native-camera-kit,
+      expo-react-native-camera-kit:
       {
         minSdkVersion: 23
       }
